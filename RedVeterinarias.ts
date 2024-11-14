@@ -4,6 +4,7 @@ export class RedVeterinarias {
     private nombre : string;
     private id: number = Math.floor(Math.random() * 1000000000);
     private Veterinarias: Veterinaria[] = [];
+    private Proovedores: Proveedor[] = [];
 
     constructor(nombre: string) {
         this.nombre = nombre;
@@ -48,7 +49,39 @@ export class RedVeterinarias {
         } else {
             console.log("No se ha encontrado la veterinaria: " + nombre);
         }
+   
     }
 
-   
+    public altaProveedor(proveedor: Proveedor): void {
+        proveedor.setId(uuidv4());
+        this.Proveedor.push(proovedor);
+        
+    }
+    
+    public bajaProveedor(proveedor: Proveedor): void {
+        const index = this.Proveedor.indexOf(proveedor);
+        if (index !== -1) {
+            this.Proveedor.splice(index, 1);
+            console.log("Se ha eliminado el proveedor: " + proveedor.getNombre());
+        } else {
+            console.log("No se ha encontrado el proveedor: " + proveedor.getNombre());
+        }
+        this.Proveedor.splice(this.Proveedor.indexOf(proveedor), 1);
+    }
+
+    public obtenerProveedores(): Proveedor[] {
+        return this.Proveedores;
+    }
+
+    public modificarProveedor(id: string, nombre: string, telefono: string): void {
+        const provEncontrado = this.Proovedores.findIndex(proveedor => proveedor.getId() === id);
+        if (provEncontrado !== -1) {
+            this.Veterinarias[provEncontrado].setNombre(nombre);
+            this.Veterinarias[provEncontrado].setTelefono(telefono);
+            console.log("Se ha modificado el proveedor: " + nombre);
+        } else {
+            console.log("No se ha encontrado el proveedor: " + nombre);
+        }
+    
+    }
 }

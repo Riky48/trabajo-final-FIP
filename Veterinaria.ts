@@ -9,7 +9,6 @@ export class Veterinaria implements IdUnico {
     
 
 
-
     constructor(nombre: string, direccion: string, telefono: string) {
         this.nombre = nombre;
         this.direccion = direccion;
