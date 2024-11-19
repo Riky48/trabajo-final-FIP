@@ -1,10 +1,11 @@
 import { Veterinaria } from "./Veterinaria";
 import { v4 as uuidv4 } from 'uuid';
+import { Proveedor } from "./Proveedor";
 export class RedVeterinarias {
     private nombre : string;
     private id: number = Math.floor(Math.random() * 1000000000);
     private Veterinarias: Veterinaria[] = [];
-    private Proovedores: Proveedor[] = [];
+    private Proveedores: Proveedor[] = [];
 
     constructor(nombre: string) {
         this.nombre = nombre;
@@ -54,19 +55,19 @@ export class RedVeterinarias {
 
     public altaProveedor(proveedor: Proveedor): void {
         proveedor.setId(uuidv4());
-        this.Proveedor.push(proovedor);
+        this.Proveedores.push(proveedor);
         
     }
     
     public bajaProveedor(proveedor: Proveedor): void {
-        const index = this.Proveedor.indexOf(proveedor);
+        const index = this.Proveedores.indexOf(proveedor);
         if (index !== -1) {
-            this.Proveedor.splice(index, 1);
+            this.Proveedores.splice(index, 1);
             console.log("Se ha eliminado el proveedor: " + proveedor.getNombre());
         } else {
             console.log("No se ha encontrado el proveedor: " + proveedor.getNombre());
         }
-        this.Proveedor.splice(this.Proveedor.indexOf(proveedor), 1);
+        this.Proveedores.splice(this.Proveedores.indexOf(proveedor), 1);
     }
 
     public obtenerProveedores(): Proveedor[] {
@@ -74,7 +75,7 @@ export class RedVeterinarias {
     }
 
     public modificarProveedor(id: string, nombre: string, telefono: string): void {
-        const provEncontrado = this.Proovedores.findIndex(proveedor => proveedor.getId() === id);
+        const provEncontrado = this.Proveedores.findIndex(proveedor => proveedor.getId() === id);
         if (provEncontrado !== -1) {
             this.Veterinarias[provEncontrado].setNombre(nombre);
             this.Veterinarias[provEncontrado].setTelefono(telefono);
