@@ -2,13 +2,16 @@ import { IdUnico } from "./IdUnico";
 import { Cliente } from './Cliente';
 import { Mascota } from './Mascota';
 import { v4 as uuidv4 } from 'uuid';
+import { Proveedor } from "./Proveedor";
 
 export class Veterinaria implements IdUnico {
     private id: string;
     private nombre: string;
     private direccion: string;
     private telefono: string;
-    private Clientes: Cliente[] = [];
+    private listaClientes: Cliente[] = [];
+    private listaMascotas: Mascota[] = [];
+    private listaProveedores:Proveedor[] = [];
     
     
 
@@ -55,36 +58,43 @@ export class Veterinaria implements IdUnico {
 
     public altaCliente(cliente: Cliente): void {
         cliente.setId(uuidv4());
-        this.Clientes.push(cliente);
+        this.listaClientes.push(cliente);
         
     }
     
     public bajaCliente(cliente: Cliente): void {
-        const index = this.Clientes.indexOf(cliente);
+        const index = this.listaClientes.indexOf(cliente);
         if (index !== -1) {
-            this.Clientes.splice(index, 1);
+            this.listaClientes.splice(index, 1);
             console.log("Se ha eliminado el cliente: " + cliente.getNombre());
         } else {
             console.log("No se ha encontrado el cliente: " + cliente.getNombre());
         }
-        this.Clientes.splice(this.Clientes.indexOf(cliente), 1);
+        this.listaClientes.splice(this.listaClientes.indexOf(cliente), 1);
     }
 
     public obtenerClientes(): Cliente[] {
-        return this.Clientes;
+        return this.listaClientes;
     }
 
     public modificarCliente(id: string, nombre: string, direccion: string, telefono: number): void {
-        const clienteEncontrado = this.Clientes.findIndex(cliente => cliente.getId() === id);
+        const clienteEncontrado = this.listaClientes.findIndex(cliente => cliente.getId() === id);
         if (clienteEncontrado !== -1) {
-            this.Clientes[clienteEncontrado].setNombre(nombre);
+            this.listaClientes[clienteEncontrado].setNombre(nombre);
             
-            this.Clientes[clienteEncontrado].setTelefono(telefono);
+            this.listaClientes[clienteEncontrado].setTelefono(telefono);
             console.log("Se ha modificado el cliente: " + nombre);
         } else {
             console.log("No se ha encontrado el cliente: " + nombre);
         }
     }
 
+    public agregarMascota(listaMascotas:Mascota):void {
+        this.listaMascotas.push(listaMascotas);
+    }
+
+    public agregarProveedor(listaProveedores:Proveedor):void {
+        this.listaProveedores.push(listaProveedores);
+    }
 
 }
