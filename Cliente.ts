@@ -1,10 +1,10 @@
 import { Mascota } from "./Mascota";
 
-export class Cliente {
+export abstract class Cliente {
     nombre: string;
     telefono: number;
     id: string;
-    mascotas: Mascota[];
+    mascotas: Mascota[]
 
     constructor(nombre:string, telefono:number, id:string) {
         this.nombre = nombre;
@@ -36,4 +36,8 @@ export class Cliente {
     setId(id:string): void {
         this.id = id;
     }
+
+    agregarMascota(mascota: Mascota): void {
+        this.mascotas.push(mascota);
+      }
 }

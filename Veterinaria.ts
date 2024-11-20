@@ -3,7 +3,8 @@ import { Cliente } from './Cliente';
 import { Mascota } from './Mascota';
 import { v4 as uuidv4 } from 'uuid';
 
-export class Veterinaria implements IdUnico {
+
+export class Veterinaria  implements IdUnico {
     private id: string;
     private nombre: string;
     private direccion: string;
@@ -11,8 +12,6 @@ export class Veterinaria implements IdUnico {
     private Clientes: Cliente[] = [];
     
     
-
-
     constructor(nombre: string, direccion: string, telefono: string) {
         this.nombre = nombre;
         this.direccion = direccion;
