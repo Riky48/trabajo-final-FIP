@@ -1,6 +1,7 @@
 import { Veterinaria } from "./Veterinaria";
 import { v4 as uuidv4 } from 'uuid';
 import { Proveedor } from "./Proveedor";
+
 export class RedVeterinarias {
     private nombre : string;
     private id: number = Math.floor(Math.random() * 1000000000);
@@ -50,7 +51,7 @@ export class RedVeterinarias {
         } else {
             console.log("No se ha encontrado la veterinaria: " + nombre);
         }
-   
+
     }
 
     public altaProveedor(proveedor: Proveedor): void {

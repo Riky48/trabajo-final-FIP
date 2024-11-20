@@ -84,5 +84,7 @@ export class Veterinaria implements IdUnico {
         } else {
             console.log("No se ha encontrado el cliente: " + nombre);
         }
-}
+    }
+
+
 }
