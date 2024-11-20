@@ -4,12 +4,17 @@ export abstract class Cliente {
     nombre: string;
     telefono: number;
     id: string;
-    mascotas: Mascota[]
+    mascotas: Mascota[];
+    visitas: number;
+    esVip: boolean;
 
-    constructor(nombre:string, telefono:number, id:string) {
+
+    constructor(nombre:string, telefono:number, id:string, visitas:number, esVip?:boolean) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.id = id;
+        this.visitas = 0;
+        this.esVip = false;
     }
 
     getNombre() {
@@ -37,7 +42,17 @@ export abstract class Cliente {
         this.id = id;
     }
 
-    agregarMascota(mascota: Mascota): void {
-        this.mascotas.push(mascota);
-      }
+
+    incrementarVisitas():void {
+        this.visitas += 1;
+        if(this.visitas >= 5) {
+            this.convertirVip();
+        }
+    }
+
+    private convertirVip():void {
+        this.esVip = true;
+        console.log(`${this.nombre} ahora es VIP`);
+    }
+
 }
