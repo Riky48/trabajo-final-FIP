@@ -4,7 +4,8 @@ import { Mascota } from './Mascota';
 import { v4 as uuidv4 } from 'uuid';
 import { Proveedor } from "./Proveedor";
 
-export class Veterinaria implements IdUnico {
+
+export class Veterinaria  implements IdUnico {
     private id: string;
     private nombre: string;
     private direccion: string;
@@ -14,8 +15,6 @@ export class Veterinaria implements IdUnico {
     private listaProveedores:Proveedor[] = [];
     
     
-
-
     constructor(nombre: string, direccion: string, telefono: string) {
         this.nombre = nombre;
         this.direccion = direccion;

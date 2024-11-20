@@ -1,7 +1,6 @@
 import { Veterinaria } from "./Veterinaria";
 import { v4 as uuidv4 } from 'uuid';
 import { Proveedor } from "./Proveedor";
-
 export class RedVeterinarias {
     private nombre : string;
     private id: number = Math.floor(Math.random() * 1000000000);

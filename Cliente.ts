@@ -2,13 +2,16 @@ import { Persona } from "./Persona";
 import { Mascota } from "./Mascota";
 
 export class Cliente extends Persona {
+
     id: string;
     mascotas: Mascota[];
     visitas: number;
     esVip: boolean;
 
+
     constructor(nombre:string, telefono:number, id:string, visitas?:number, esVip?:boolean) {
-        super(nombre, telefono)
+        super(nombre, telefono);
+
         this.id = id;
         this.visitas = 0;
         this.esVip = false;
@@ -23,6 +26,7 @@ export class Cliente extends Persona {
         this.id = id;
     }
 
+
     incrementarVisitas():void {
         this.visitas += 1;
         if(this.visitas >= 5) {
@@ -34,4 +38,5 @@ export class Cliente extends Persona {
         this.esVip = true;
         console.log(`${this.nombre} ahora es VIP`);
     }
+
 }
