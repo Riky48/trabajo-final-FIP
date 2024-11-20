@@ -88,12 +88,45 @@ export class Veterinaria  implements IdUnico {
         }
     }
 
-    public agregarMascota(listaMascotas:Mascota):void {
-        this.listaMascotas.push(listaMascotas);
+
+
+
+    public altaProveedor(listaProveedores: Proveedor): void {
+        listaProveedores.setId(uuidv4());
+        this.listaProveedores.push(listaProveedores);
+        
+    }
+    
+    public bajaProveedor(proveedor: Proveedor): void {
+        const index = this.listaProveedores.indexOf(proveedor);
+        if (index !== -1) {
+            this.listaProveedores.splice(index, 1);
+            console.log("Se ha eliminado el proveedor: " + proveedor.getNombre());
+        } else {
+            console.log("No se ha encontrado el proveedor: " + proveedor.getNombre());
+        }
+        this.listaProveedores.splice(this.listaProveedores.indexOf(proveedor), 1);
     }
 
-    public agregarProveedor(listaProveedores:Proveedor):void {
-        this.listaProveedores.push(listaProveedores);
+    public obtenerProveedores(): Proveedor[] {
+        return this.listaProveedores;
+    }
+
+    public modificarProveedor(id: string, nombre: string, telefono: number): void {
+        const provEncontrado = this.listaProveedores.findIndex(proveedor => proveedor.getId() === id);
+        if (provEncontrado !== -1) {
+            this.listaProveedores[provEncontrado].setNombre(nombre);
+            this.listaProveedores[provEncontrado].setTelefono(telefono);
+            console.log("Se ha modificado el proveedor: " + nombre);
+        } else {
+            console.log("No se ha encontrado el proveedor: " + nombre);
+        }
+    
+    }
+
+
+    public agregarMascota(listaMascotas:Mascota):void {
+        this.listaMascotas.push(listaMascotas);
     }
 
 }
