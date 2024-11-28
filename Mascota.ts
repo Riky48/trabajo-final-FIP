@@ -8,8 +8,8 @@ export class Mascota {
         this.especie = especie;
         this.id = id;
 
-        if(this.especie != "perro" && this.especie != "gato") {
-            this.especie = "Exotico";
+        if(this.especie.toLowerCase() !== "perro" && this.especie.toLowerCase() !== "gato") {
+            this.especie = "Exótico";
         }
     }
 
@@ -17,8 +17,16 @@ export class Mascota {
         return this.nombre;
     }
 
+    setNombre(nombre:string): void {
+        this.nombre = nombre;
+    }
+
     getEspecie() {
         return this.especie;
+    }
+
+    setEspecie(especie:string): void {
+        this.especie = especie;
     }
 
     getId() {

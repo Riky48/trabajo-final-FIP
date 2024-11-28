@@ -32,24 +32,37 @@ export class RedVeterinarias {
         } else {
             console.log("No se ha encontrado la veterinaria: " + veterinaria.getNombre());
         }
-        this.Veterinarias.splice(this.Veterinarias.indexOf(veterinaria), 1);
     }
 
     public obtenerVeterinarias(): Veterinaria[] {
         return this.Veterinarias;
     }
 
-    public modificarVeterinaria(id: string, nombre: string, direccion: string, telefono: string): void {
-        const veteEncontrada = this.Veterinarias.findIndex(veterinaria => veterinaria.getId() === id);
+    
+
+    public modificarVeterinaria( nombre: string, nuevonombre : string, nuevadireccion: string, nuevotelefono: number): void {
+        const veteEncontrada = this.Veterinarias.findIndex(veterinaria => veterinaria.getNombre() === nombre);
         if (veteEncontrada !== -1) {
-            this.Veterinarias[veteEncontrada].setNombre(nombre);
-            this.Veterinarias[veteEncontrada].setDireccion(direccion);
-            this.Veterinarias[veteEncontrada].setTelefono(telefono);
+            this.Veterinarias[veteEncontrada].setNombre(nuevonombre);
+            this.Veterinarias[veteEncontrada].setDireccion(nuevadireccion);
+            this.Veterinarias[veteEncontrada].setTelefono(nuevotelefono);
             console.log("Se ha modificado la veterinaria: " + nombre);
         } else {
             console.log("No se ha encontrado la veterinaria: " + nombre);
         }
 
+    }
+
+    public imprimirVeterinarias(): void {
+        const veterinarias = this.obtenerVeterinarias();
+        if (veterinarias.length === 0) {
+            console.log("No hay veterinarias en la lista.");
+        } else {
+            // Imprime cada cliente usando el método mostrarCliente()
+            veterinarias.forEach(cliente => {
+                console.log(cliente.mostrarVeterinaria());
+            });
+        }
     }
 
 }

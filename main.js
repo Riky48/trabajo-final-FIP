@@ -1,30 +1,18 @@
-import { RedVeterinarias } from "./RedVeterinarias";
-import { Mascota } from "./Mascota";
-import { Veterinaria } from "./Veterinaria";
-import { Cliente } from "./Cliente";
-import { Proveedor } from "./Proveedor";
-
-
-/*
-const redVeterinarias = new RedVeterinarias("Riky");
-
-const veterinaria1 = new Veterinaria("Alex", "Calle de la Veterinaria", 12345678);
-const veterinaria2 = new Veterinaria("richardinson", "piedras 555", 12345678666);
-
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var RedVeterinarias_1 = require("./RedVeterinarias");
+var Veterinaria_1 = require("./Veterinaria");
+var redVeterinarias = new RedVeterinarias_1.RedVeterinarias("Riky");
+var veterinaria1 = new Veterinaria_1.Veterinaria("Alex", "Calle de la Veterinaria", 12345678);
+var veterinaria2 = new Veterinaria_1.Veterinaria("richardinson", "piedras 555", 12345678666);
 redVeterinarias.altaVeterinaria(veterinaria1);
 redVeterinarias.altaVeterinaria(veterinaria2);
-
 redVeterinarias.imprimirVeterinarias();
-
 redVeterinarias.modificarVeterinaria("Alex", "Alexandria", "elvago 5656", 556678);
 redVeterinarias.imprimirVeterinarias();
-
 redVeterinarias.bajaVeterinaria(veterinaria1);
 redVeterinarias.bajaVeterinaria(veterinaria2);
-
 redVeterinarias.imprimirVeterinarias();
-
 /*
 let Proveedor1 = new Proveedor("Comidapaperro", 14554);
 let Proveedor2 = new Proveedor("Comidaspaexoticos", 1455554);
@@ -83,4 +71,4 @@ console.log(cliente3)
 veterinaria1.bajaCliente(cliente1);
 veterinaria1.bajaCliente(cliente2);
 veterinaria1.bajaCliente(cliente3);
-veterinaria1.imprimirClientes(); */
+veterinaria1.imprimirClientes(); */ 

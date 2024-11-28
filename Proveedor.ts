@@ -15,4 +15,8 @@ export class Proveedor extends Persona {
     setId(id: string): void {
         this.id = id;
     }
+
+    public mostrarProveedor(): string {
+        return `ID: ${this.id}, Nombre: ${this.nombre}, Teléfono: ${this.telefono}`;
+    }
 }

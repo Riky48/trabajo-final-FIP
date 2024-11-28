@@ -1,6 +1,6 @@
 export abstract class Persona {
     protected nombre: string;
-    private telefono: number;
+    protected telefono: number;
 
     constructor(nombre:string, telefono:number) {
         this.nombre = nombre;
