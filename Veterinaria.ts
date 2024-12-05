@@ -1,6 +1,5 @@
 import { IdUnico } from "./IdUnico";
 import { Cliente } from './Cliente';
-import { Mascota } from './Mascota';
 import { v4 as uuidv4 } from 'uuid';
 import { Proveedor } from "./Proveedor";
 

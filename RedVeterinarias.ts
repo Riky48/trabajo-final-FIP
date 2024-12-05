@@ -1,6 +1,6 @@
 import { Veterinaria } from "./Veterinaria";
 import { v4 as uuidv4 } from 'uuid';
-import { Proveedor } from "./Proveedor";
+
 export class RedVeterinarias {
     private nombre : string;
     private id: number = Math.floor(Math.random() * 1000000000);
@@ -58,9 +58,9 @@ export class RedVeterinarias {
         if (veterinarias.length === 0) {
             console.log("No hay veterinarias en la lista.");
         } else {
-            // Imprime cada cliente usando el método mostrarCliente()
-            veterinarias.forEach(cliente => {
-                console.log(cliente.mostrarVeterinaria());
+            // Imprime cada veterinaria usando el método mostrarVeterinaria()
+            veterinarias.forEach(veterinarias => {
+                console.log(veterinarias.mostrarVeterinaria());
             });
         }
     }

@@ -3,9 +3,10 @@ import { Mascota } from "./Mascota";
 import { Veterinaria } from "./Veterinaria";
 import { Cliente } from "./Cliente";
 import { Proveedor } from "./Proveedor";
+import { asegurarIdUnico } from "./Utilidades";
 
 
-/*
+
 const redVeterinarias = new RedVeterinarias("Riky");
 
 const veterinaria1 = new Veterinaria("Alex", "Calle de la Veterinaria", 12345678);
@@ -14,6 +15,8 @@ const veterinaria2 = new Veterinaria("richardinson", "piedras 555", 12345678666)
 
 redVeterinarias.altaVeterinaria(veterinaria1);
 redVeterinarias.altaVeterinaria(veterinaria2);
+
+
 
 redVeterinarias.imprimirVeterinarias();
 
@@ -25,7 +28,11 @@ redVeterinarias.bajaVeterinaria(veterinaria2);
 
 redVeterinarias.imprimirVeterinarias();
 
-/*
+
+
+// Verifica los resultados
+
+
 let Proveedor1 = new Proveedor("Comidapaperro", 14554);
 let Proveedor2 = new Proveedor("Comidaspaexoticos", 1455554);
 
@@ -39,6 +46,15 @@ veterinaria1.altaCliente(cliente1);
 veterinaria1.altaCliente(cliente2);
 veterinaria1.altaCliente(cliente3);
 
+const clientes : Cliente [] = [cliente1, cliente2, cliente3];
+
+asegurarIdUnico(clientes);                                                          // verifica que todos los clientes tengan un id unico
+
+clientes.forEach(cliente => {
+    console.log(`ID: ${cliente.getId()}, Nombre: ${cliente['nombre']}`);
+});
+
+ 
 veterinaria1.altaProveedor(Proveedor1);
 veterinaria1.altaProveedor(Proveedor2);
 
@@ -66,11 +82,11 @@ cliente3.agregarMascota(mascota3);
 
 
 
-/*cliente1.incrementarVisitas();
 cliente1.incrementarVisitas();
-cliente1.esonoVip();
-cliente2.esonoVip();
-cliente3.esonoVip();
+cliente1.incrementarVisitas();
+cliente1.esONoVip();
+cliente2.esONoVip();
+cliente3.esONoVip();
 
 console.log(cliente1);
 
@@ -83,4 +99,4 @@ console.log(cliente3)
 veterinaria1.bajaCliente(cliente1);
 veterinaria1.bajaCliente(cliente2);
 veterinaria1.bajaCliente(cliente3);
-veterinaria1.imprimirClientes(); */
+veterinaria1.imprimirClientes(); 

@@ -1,7 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var RedVeterinarias_1 = require("./RedVeterinarias");
+var Mascota_1 = require("./Mascota");
 var Veterinaria_1 = require("./Veterinaria");
+var Cliente_1 = require("./Cliente");
+var Proveedor_1 = require("./Proveedor");
+var Utilidades_1 = require("./Utilidades");
 var redVeterinarias = new RedVeterinarias_1.RedVeterinarias("Riky");
 var veterinaria1 = new Veterinaria_1.Veterinaria("Alex", "Calle de la Veterinaria", 12345678);
 var veterinaria2 = new Veterinaria_1.Veterinaria("richardinson", "piedras 555", 12345678666);
@@ -13,62 +17,46 @@ redVeterinarias.imprimirVeterinarias();
 redVeterinarias.bajaVeterinaria(veterinaria1);
 redVeterinarias.bajaVeterinaria(veterinaria2);
 redVeterinarias.imprimirVeterinarias();
-/*
-let Proveedor1 = new Proveedor("Comidapaperro", 14554);
-let Proveedor2 = new Proveedor("Comidaspaexoticos", 1455554);
-
-
-
-let cliente1 = new Cliente("Juan", 12345678, 6);
-let cliente2 = new Cliente("Pedro", 98765432, 2);
-let cliente3 = new Cliente("Maria", 11111111, 0);
-
+// Verifica los resultados
+var Proveedor1 = new Proveedor_1.Proveedor("Comidapaperro", 14554);
+var Proveedor2 = new Proveedor_1.Proveedor("Comidaspaexoticos", 1455554);
+var cliente1 = new Cliente_1.Cliente("Juan", 12345678, 6);
+var cliente2 = new Cliente_1.Cliente("Pedro", 98765432, 2);
+var cliente3 = new Cliente_1.Cliente("Maria", 11111111, 0);
 veterinaria1.altaCliente(cliente1);
 veterinaria1.altaCliente(cliente2);
 veterinaria1.altaCliente(cliente3);
-
+var clientes = [cliente1, cliente2, cliente3];
+(0, Utilidades_1.asegurarIdUnico)(clientes); // verifica que todos los clientes tengan un id unico
+clientes.forEach(function (cliente) {
+    console.log("ID: ".concat(cliente.getId(), ", Nombre: ").concat(cliente['nombre']));
+});
 veterinaria1.altaProveedor(Proveedor1);
 veterinaria1.altaProveedor(Proveedor2);
-
 veterinaria1.imprimirProveedores();
-
 veterinaria1.modificarProveedor("Comidapaperro", "Comidaspagato", 145343454);
-
 veterinaria1.imprimirProveedores();
 veterinaria1.bajaProveedor(Proveedor1);
 veterinaria1.bajaProveedor(Proveedor2);
-
 veterinaria1.imprimirProveedores();
-
-let mascota1 = new Mascota("Chiquito", "Cerdo", 1);
-let mascota2 = new Mascota("Odin", "Gato", 2);
-let mascota3 = new Mascota("Ocico", "Perro", 3);
-
-
-
+var mascota1 = new Mascota_1.Mascota("Chiquito", "Cerdo", 1);
+var mascota2 = new Mascota_1.Mascota("Odin", "Gato", 2);
+var mascota3 = new Mascota_1.Mascota("Ocico", "Perro", 3);
 cliente1.agregarMascota(mascota1);
 cliente1.agregarMascota(mascota2);
 cliente2.agregarMascota(mascota2);
 cliente3.agregarMascota(mascota3);
-
-
-
-
-/*cliente1.incrementarVisitas();
 cliente1.incrementarVisitas();
-cliente1.esonoVip();
-cliente2.esonoVip();
-cliente3.esonoVip();
-
+cliente1.incrementarVisitas();
+cliente1.esONoVip();
+cliente2.esONoVip();
+cliente3.esONoVip();
 console.log(cliente1);
-
 cliente1.modificarMascota("Chiquito", "Grandote", "Vaca");
-
 console.log(cliente1);
-console.log(cliente2)
-console.log(cliente3)
-
+console.log(cliente2);
+console.log(cliente3);
 veterinaria1.bajaCliente(cliente1);
 veterinaria1.bajaCliente(cliente2);
 veterinaria1.bajaCliente(cliente3);
-veterinaria1.imprimirClientes(); */ 
+veterinaria1.imprimirClientes();
