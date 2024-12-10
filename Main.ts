@@ -17,11 +17,12 @@ function main() {
     while (continuar) {
     console.log(`
     ===== Menú Veterinaria =====
-    1. Alta de Cliente
-    2. Baja de Cliente
-    3. Modificar cliente
-    4. Imprimir Clientes
-    5. Salir
+    1. Alta de Cliente.
+    2. Baja de Cliente.
+    3. Modificar cliente.
+    4. Imprimir Clientes.
+    5. Gestionar mascotas.
+    6. Salir.
     `);
 
     const opcion = readlineSync.question("Seleccione una opción: ");
@@ -102,6 +103,39 @@ function main() {
             break;
         }
         case "5": {
+            const nombreCliente = readlineSync.question("Ingrese el nombre del cliente: ");
+            const cliente = veterinaria.modificarCliente(nombreCliente);
+
+            if(cliente) {
+                console.log(`
+                ¿Que desea hacer con la mascota?
+                1. Modificar una mascota
+                2. Eliminar una mascota`);
+                
+                const opcionMascotas = readlineSync.question("Seleccione una opción: ");
+
+                switch(opcionMascotas.trim()) {
+                    case "1": {
+                        const nombreMascota = readlineSync.question("Ingrese el nombre de la mascota a modificar: ");
+                        const nuevoNombre = readlineSync.question("Ingrese el nuevo nombre de la mascota: ");
+                        const nuevaEspecie = readlineSync.question("Ingrese la nueva especie de la mascota: ");
+                        cliente.modificarMascota(nombreMascota, nuevoNombre, nuevaEspecie);
+                        break;
+                    }
+                    case "2": {
+                        const nombreMascota = readlineSync.question("Ingrese el nombre de la mascota que desea eliminar: ");
+                        cliente.eliminarMascota(nombreMascota);
+                        break;
+                    }
+                    default: {
+                        console.log("Opcion no valida. Volviendo al menu principal.");
+                        
+                    }
+                }
+            }
+            break;
+        }
+        case "6": {
           // Salir
             continuar = false;
             console.log("¡Gracias por usar el sistema de veterinaria!");

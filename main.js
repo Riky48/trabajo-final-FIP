@@ -9,7 +9,7 @@ function main() {
     var veterinaria = new Veterinaria_1.Veterinaria("algo", "algo", 12);
     var continuar = true;
     var _loop_1 = function () {
-        console.log("\n    ===== Men\u00FA Veterinaria =====\n    1. Alta de Cliente\n    2. Baja de Cliente\n    3. Modificar cliente\n    4. Imprimir Clientes\n    5. Salir\n    ");
+        console.log("\n    ===== Men\u00FA Veterinaria =====\n    1. Alta de Cliente.\n    2. Baja de Cliente.\n    3. Modificar cliente.\n    4. Imprimir Clientes.\n    5. Gestionar mascotas.\n    6. Salir.\n    ");
         var opcion = readlineSync.question("Seleccione una opción: ");
         switch (opcion.trim()) {
             case "1": {
@@ -76,6 +76,32 @@ function main() {
                 break;
             }
             case "5": {
+                var nombreCliente = readlineSync.question("Ingrese el nombre del cliente: ");
+                var cliente = veterinaria.modificarCliente(nombreCliente);
+                if (cliente) {
+                    console.log("\n                \u00BFQue desea hacer con la mascota?\n                1. Modificar una mascota\n                2. Eliminar una mascota");
+                    var opcionMascotas = readlineSync.question("Seleccione una opción: ");
+                    switch (opcionMascotas.trim()) {
+                        case "1": {
+                            var nombreMascota = readlineSync.question("Ingrese el nombre de la mascota a modificar: ");
+                            var nuevoNombre = readlineSync.question("Ingrese el nuevo nombre de la mascota: ");
+                            var nuevaEspecie = readlineSync.question("Ingrese la nueva especie de la mascota: ");
+                            cliente.modificarMascota(nombreMascota, nuevoNombre, nuevaEspecie);
+                            break;
+                        }
+                        case "2": {
+                            var nombreMascota = readlineSync.question("Ingrese el nombre de la mascota que desea eliminar: ");
+                            cliente.eliminarMascota(nombreMascota);
+                            break;
+                        }
+                        default: {
+                            console.log("Opcion no valida. Volviendo al menu principal.");
+                        }
+                    }
+                }
+                break;
+            }
+            case "6": {
                 // Salir
                 continuar = false;
                 console.log("¡Gracias por usar el sistema de veterinaria!");

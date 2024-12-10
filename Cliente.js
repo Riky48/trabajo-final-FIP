@@ -76,18 +76,29 @@ var Cliente = /** @class */ (function (_super) {
             this.mascotas.forEach(function (m) { return console.log("- ".concat(m.nombre, " (").concat(m.especie, ")")); });
         }
     };
-    Cliente.prototype.modificarMascota = function (nombre, nuevonombre, nuevaespecie) {
-        var mascotaEncontrada = this.mascotas.findIndex(function (mascota) { return mascota.getNombre() === nombre; });
-        if (mascotaEncontrada !== -1) {
-            this.mascotas[mascotaEncontrada].setNombre(nuevonombre);
-            this.mascotas[mascotaEncontrada].setEspecie(nuevaespecie);
-            console.log("Se ha modificado la mascota: " + nombre);
+    Cliente.prototype.modificarMascota = function (nombre, nuevoNombre, nuevaEspecie) {
+        var mascota = this.mascotas.find(function (m) { return m.nombre === nombre; });
+        if (mascota) {
+            mascota.nombre = nuevoNombre;
+            mascota.especie = nuevaEspecie;
+            console.log("Mascota ".concat(mascota.nombre, " modificada con exito."));
+            return true;
         }
         else {
-            console.log("No se ha encontrado la mascota: " + nombre);
+            console.log("Mascota ".concat(nombre, " modificada con exito."));
+            return false;
         }
-        if (nuevaespecie.toLowerCase() !== "perro" && nuevaespecie.toLowerCase() !== "gato") {
-            this.mascotas[mascotaEncontrada].setEspecie("Exótico");
+    };
+    Cliente.prototype.eliminarMascota = function (nombre) {
+        var index = this.mascotas.findIndex(function (m) { return m.nombre === nombre; });
+        if (index !== -1) {
+            this.mascotas.splice(index, 1);
+            console.log("Mascota ".concat(nombre, " eliminada con \u00E9xito."));
+            return true;
+        }
+        else {
+            console.log("Mascota ".concat(nombre, " no encontrada."));
+            return false;
         }
     };
     return Cliente;

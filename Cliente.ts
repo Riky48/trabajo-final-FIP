@@ -82,21 +82,28 @@ export class Cliente extends Persona {
     }
 
 
-    public modificarMascota( nombre: string, nuevonombre: string, nuevaespecie : string): void {
-        const mascotaEncontrada = this.mascotas.findIndex(mascota => mascota.getNombre() === nombre);
-        if (mascotaEncontrada !== -1) {
-            
-
-            this.mascotas[mascotaEncontrada].setNombre(nuevonombre);
-            
-            this.mascotas[mascotaEncontrada].setEspecie(nuevaespecie);
-            
-            console.log("Se ha modificado la mascota: " + nombre);
-        } else {
-            console.log("No se ha encontrado la mascota: " + nombre);
+    public modificarMascota( nombre: string, nuevoNombre: string, nuevaEspecie : string): boolean {
+        const mascota = this.mascotas.find((m) => m.nombre === nombre);
+        if(mascota) {
+            mascota.nombre = nuevoNombre;
+            mascota.especie = nuevaEspecie;
+            console.log(`Mascota ${mascota.nombre} modificada con exito.`);
+            return true;
+        }else {
+            console.log(`Mascota ${nombre} modificada con exito.`);
+            return false
         }
-        if(nuevaespecie.toLowerCase() !== "perro" && nuevaespecie.toLowerCase() !== "gato") {
-            this.mascotas[mascotaEncontrada].setEspecie( "Exótico");
+    }
+
+    public eliminarMascota(nombre:string): boolean {
+        const index = this.mascotas.findIndex((m) => m.nombre === nombre);
+        if(index !== -1) {
+            this.mascotas.splice(index, 1);
+            console.log(`Mascota ${nombre} eliminada con éxito.`);
+            return true;
+        }else {
+            console.log(`Mascota ${nombre} no encontrada.`);
+            return false;
         }
     }
 
