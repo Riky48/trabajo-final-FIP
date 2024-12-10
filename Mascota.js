@@ -5,7 +5,7 @@ var Mascota = /** @class */ (function () {
     function Mascota(nombre, especie, id) {
         this.nombre = nombre;
         this.especie = especie;
-        this.id = id;
+        this.id = this.id;
         if (this.especie.toLowerCase() !== "perro" && this.especie.toLowerCase() !== "gato") {
             this.especie = "Exótico";
         }

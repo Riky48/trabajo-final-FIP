@@ -3,10 +3,10 @@ export class Mascota {
     especie: string;
     id: number;
 
-    constructor(nombre:string, especie:string, id:number) {
+    constructor(nombre:string, especie:string, id?:number) {
         this.nombre = nombre;
         this.especie = especie;
-        this.id = id;
+        this.id = this.id;
 
         if(this.especie.toLowerCase() !== "perro" && this.especie.toLowerCase() !== "gato") {
             this.especie = "Exótico";

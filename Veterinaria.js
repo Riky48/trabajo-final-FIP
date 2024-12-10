@@ -63,19 +63,17 @@ var Veterinaria = /** @class */ (function () {
             // Imprime cada cliente usando el método mostrarCliente()
             clientes.forEach(function (cliente) {
                 console.log(cliente.mostrarCliente());
+                cliente.imprimirMascota();
             });
         }
     };
-    Veterinaria.prototype.modificarCliente = function (nombre, nuevonombre, nuevotelefono, id) {
-        var clienteEncontrado = this.listaClientes.findIndex(function (cliente) { return cliente.getNombre() === nombre; });
-        if (clienteEncontrado !== -1) {
-            this.listaClientes[clienteEncontrado].setNombre(nuevonombre);
-            this.listaClientes[clienteEncontrado].setTelefono(nuevotelefono);
-            console.log("Se ha modificado el cliente: " + nombre);
+    Veterinaria.prototype.modificarCliente = function (nombre) {
+        var cliente = this.listaClientes.find(function (c) { return c.nombre === nombre; });
+        if (!cliente) {
+            console.log("Cliente ".concat(nombre, " no encontrado."));
+            return null;
         }
-        else {
-            console.log("No se ha encontrado el cliente: " + nombre);
-        }
+        return cliente;
     };
     Veterinaria.prototype.altaProveedor = function (listaProveedores) {
         listaProveedores.setId((0, uuid_1.v4)());

@@ -4,16 +4,16 @@ import { Mascota } from "./Mascota";
 export class Cliente extends Persona {
 
     id: string;
-    mascotas: Mascota[] = [];
+    public mascotas: Mascota[] = [];
     visitas: number;
     esVip: boolean;
 
 
-    constructor(nombre:string, telefono:number,visitas:number, Mascota? : Mascota, id?:string, esVip?:boolean) {
+    constructor(nombre:string, telefono:number, Mascota?: Mascota, id?:string, esVip?:boolean,  visitas?:number) {
         super(nombre, telefono);
 
         this.mascotas = this.mascotas;
-        this.visitas = visitas;
+        this.visitas = this.visitas;
         this.esVip = false;
     }
 
@@ -48,7 +48,6 @@ export class Cliente extends Persona {
     }
 
     incrementarVisitas():void {
-         
         this.visitas ++;
     }
 
@@ -64,6 +63,22 @@ export class Cliente extends Persona {
 
     public agregarMascota(mascota : Mascota):void {
         this.mascotas.push(mascota);
+        console.log(`Mascota ${mascota.nombre} agregada a ${this.nombre}. `);
+        
+    }
+
+    public obtenerMacota(): Mascota[] {
+        return this.mascotas;
+    }
+
+    public imprimirMascota():void {
+        if(this.mascotas.length == 0) {
+            console.log(`${this.nombre} no tiene mascota`);
+            
+        }else {
+            console.log(`Mascota de ${this.nombre}: `);
+            this.mascotas.forEach((m) => console.log(`- ${m.nombre} (${m.especie})`));
+        }
     }
 
 

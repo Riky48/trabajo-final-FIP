@@ -19,11 +19,11 @@ exports.Cliente = void 0;
 var Persona_1 = require("./Persona");
 var Cliente = /** @class */ (function (_super) {
     __extends(Cliente, _super);
-    function Cliente(nombre, telefono, visitas, Mascota, id, esVip) {
+    function Cliente(nombre, telefono, Mascota, id, esVip, visitas) {
         var _this = _super.call(this, nombre, telefono) || this;
         _this.mascotas = [];
         _this.mascotas = _this.mascotas;
-        _this.visitas = visitas;
+        _this.visitas = _this.visitas;
         _this.esVip = false;
         return _this;
     }
@@ -62,6 +62,19 @@ var Cliente = /** @class */ (function (_super) {
     };
     Cliente.prototype.agregarMascota = function (mascota) {
         this.mascotas.push(mascota);
+        console.log("Mascota ".concat(mascota.nombre, " agregada a ").concat(this.nombre, ". "));
+    };
+    Cliente.prototype.obtenerMacota = function () {
+        return this.mascotas;
+    };
+    Cliente.prototype.imprimirMascota = function () {
+        if (this.mascotas.length == 0) {
+            console.log("".concat(this.nombre, " no tiene mascota"));
+        }
+        else {
+            console.log("Mascota de ".concat(this.nombre, ": "));
+            this.mascotas.forEach(function (m) { return console.log("- ".concat(m.nombre, " (").concat(m.especie, ")")); });
+        }
     };
     Cliente.prototype.modificarMascota = function (nombre, nuevonombre, nuevaespecie) {
         var mascotaEncontrada = this.mascotas.findIndex(function (mascota) { return mascota.getNombre() === nombre; });

@@ -1,18 +1,117 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var RedVeterinarias_1 = require("./RedVeterinarias");
+var Mascota_1 = require("./Mascota");
 var Veterinaria_1 = require("./Veterinaria");
-var redVeterinarias = new RedVeterinarias_1.RedVeterinarias("Riky");
-var veterinaria1 = new Veterinaria_1.Veterinaria("Alex", "Calle de la Veterinaria", 12345678);
-var veterinaria2 = new Veterinaria_1.Veterinaria("richardinson", "piedras 555", 12345678666);
+var Cliente_1 = require("./Cliente");
+var readlineSync = require("readline-sync");
+var veterinaria1 = new Veterinaria_1.Veterinaria("algo", "algo", 23);
+function main() {
+    var veterinaria = new Veterinaria_1.Veterinaria("algo", "algo", 12);
+    var continuar = true;
+    var _loop_1 = function () {
+        console.log("\n    ===== Men\u00FA Veterinaria =====\n    1. Alta de Cliente\n    2. Baja de Cliente\n    3. Modificar cliente\n    4. Imprimir Clientes\n    5. Salir\n    ");
+        var opcion = readlineSync.question("Seleccione una opción: ");
+        switch (opcion.trim()) {
+            case "1": {
+                // Alta de Cliente
+                var nombre = readlineSync.question("Ingrese el nombre del cliente: ");
+                var telefono = readlineSync.question("Ingrese el teléfono del cliente: ");
+                var nuevoCliente = new Cliente_1.Cliente(nombre, telefono);
+                veterinaria.altaCliente(nuevoCliente);
+                if (true) {
+                    var agregarmascota = readlineSync.keyInYNStrict("queres agregar una mascota?: ");
+                    if (agregarmascota) {
+                        var nombre_1 = readlineSync.question("nombre de tu mascota: ");
+                        var especie = readlineSync.question("especie de tu masctoa: ");
+                        var nuevaMascota = new Mascota_1.Mascota(nombre_1, especie);
+                        nuevoCliente.agregarMascota(nuevaMascota);
+                    }
+                    else {
+                        console.log("volviendo al menu principal");
+                    }
+                    break;
+                }
+            }
+            case "2": {
+                // Baja de Cliente
+                veterinaria.imprimirClientes();
+                var nombre_2 = readlineSync.question("Ingrese el nombre del cliente a eliminar: ");
+                var clienteAEliminar = veterinaria.obtenerClientes().find(function (c) { return c.nombre === nombre_2; });
+                if (clienteAEliminar) {
+                    veterinaria.bajaCliente(clienteAEliminar);
+                }
+                else {
+                    console.log("Cliente no encontrado.");
+                }
+                break;
+            }
+            case "3": {
+                var nombre = readlineSync.question("Ingrese el nombre del cliente que quiere modificar: ");
+                var cliente = veterinaria.modificarCliente(nombre);
+                if (cliente) {
+                    console.log("\n                    \u00BFQue desea modificar?\n                    1. Nombre.\n                    2. Telefono.");
+                    var opcionModificar = readlineSync.question("Seleccione una opción: ");
+                    switch (opcionModificar.trim()) {
+                        case "1": {
+                            var nuevoNombre = readlineSync.question("Ingrese el nuevo nombre: ");
+                            cliente.nombre = nuevoNombre;
+                            console.log("Nombre modificado con éxito.");
+                            break;
+                        }
+                        case "2": {
+                            var nuevoTelefono = readlineSync.question("Ingrese el nuevo telefono: ");
+                            cliente.telefono = nuevoTelefono;
+                            console.log("Telefono modificado con éxito.");
+                            break;
+                        }
+                        default: {
+                            console.log("Opcion no válida. Volviendo al menú principal.");
+                        }
+                    }
+                }
+            }
+            case "4": {
+                // Imprimir Clientes
+                veterinaria.imprimirClientes();
+                break;
+            }
+            case "5": {
+                // Salir
+                continuar = false;
+                console.log("¡Gracias por usar el sistema de veterinaria!");
+                break;
+            }
+            default: {
+                console.log("Opción no válida. Intente nuevamente.");
+            }
+        }
+    };
+    while (continuar) {
+        _loop_1();
+    }
+}
+// Ejecutar la aplicación
+main();
+/*
+const redVeterinarias = new RedVeterinarias("Riky");
+
+const veterinaria1 = new Veterinaria("Alex", "Calle de la Veterinaria", 12345678);
+const veterinaria2 = new Veterinaria("richardinson", "piedras 555", 12345678666);
+
+
 redVeterinarias.altaVeterinaria(veterinaria1);
 redVeterinarias.altaVeterinaria(veterinaria2);
+
 redVeterinarias.imprimirVeterinarias();
+
 redVeterinarias.modificarVeterinaria("Alex", "Alexandria", "elvago 5656", 556678);
 redVeterinarias.imprimirVeterinarias();
+
 redVeterinarias.bajaVeterinaria(veterinaria1);
 redVeterinarias.bajaVeterinaria(veterinaria2);
+
 redVeterinarias.imprimirVeterinarias();
+
 /*
 let Proveedor1 = new Proveedor("Comidapaperro", 14554);
 let Proveedor2 = new Proveedor("Comidaspaexoticos", 1455554);

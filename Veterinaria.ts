@@ -1,13 +1,12 @@
 import { IdUnico } from "./IdUnico";
 import { Cliente } from './Cliente';
-import { Mascota } from './Mascota';
 import { v4 as uuidv4 } from 'uuid';
 import { Proveedor } from "./Proveedor";
 
 
 export class Veterinaria  implements IdUnico {
     private id: string;
-    private nombre: string;
+    public nombre: string;
     private direccion: string;
     private telefono: number;
     private listaClientes: Cliente[] = [];
@@ -91,20 +90,18 @@ export class Veterinaria  implements IdUnico {
             // Imprime cada cliente usando el método mostrarCliente()
             clientes.forEach(cliente => {
                 console.log(cliente.mostrarCliente());
+                cliente.imprimirMascota();
             });
         }
     }
 
-    public modificarCliente( nombre: string, nuevonombre: string, nuevotelefono: number, id?: string): void {
-        const clienteEncontrado = this.listaClientes.findIndex(cliente => cliente.getNombre() === nombre);
-        if (clienteEncontrado !== -1) {
-            this.listaClientes[clienteEncontrado].setNombre(nuevonombre);
-           
-            this.listaClientes[clienteEncontrado].setTelefono(nuevotelefono);
-            console.log("Se ha modificado el cliente: " + nombre);
-        } else {
-            console.log("No se ha encontrado el cliente: " + nombre);
+    public modificarCliente( nombre: string): Cliente | null{
+        const cliente = this.listaClientes.find((c) => c.nombre === nombre);
+        if(!cliente) {
+            console.log(`Cliente ${nombre} no encontrado.`);
+            return null;
         }
+        return cliente;
     }
 
 

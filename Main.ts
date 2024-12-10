@@ -3,7 +3,119 @@ import { Mascota } from "./Mascota";
 import { Veterinaria } from "./Veterinaria";
 import { Cliente } from "./Cliente";
 import { Proveedor } from "./Proveedor";
+import * as readlineSync from "readline-sync";
 
+const veterinaria1 = new Veterinaria("algo", "algo", 23)
+
+
+
+function main() {
+    const veterinaria = new Veterinaria("algo", "algo", 12);
+
+    let continuar = true;
+
+    while (continuar) {
+    console.log(`
+    ===== Menú Veterinaria =====
+    1. Alta de Cliente
+    2. Baja de Cliente
+    3. Modificar cliente
+    4. Imprimir Clientes
+    5. Salir
+    `);
+
+    const opcion = readlineSync.question("Seleccione una opción: ");
+
+    switch (opcion.trim()) {
+        case "1": {
+          // Alta de Cliente
+            const nombre = readlineSync.question("Ingrese el nombre del cliente: ");
+            const telefono = readlineSync.question("Ingrese el teléfono del cliente: ");
+            const nuevoCliente = new Cliente(nombre, telefono,);
+            veterinaria.altaCliente(nuevoCliente);
+
+            if(true) {
+                const agregarmascota = readlineSync.keyInYNStrict(
+                    "queres agregar una mascota?: "
+                );
+                if(agregarmascota) {
+                    const nombre = readlineSync.question("nombre de tu mascota: ");
+                    const especie = readlineSync.question("especie de tu masctoa: ");
+                    const nuevaMascota = new Mascota(nombre, especie);
+                    nuevoCliente.agregarMascota(nuevaMascota);
+                } else {
+                    console.log("volviendo al menu principal");
+                }
+                break;
+            }
+        }
+        case "2": {
+            // Baja de Cliente
+            veterinaria.imprimirClientes();
+            const nombre = readlineSync.question("Ingrese el nombre del cliente a eliminar: ");
+            const clienteAEliminar = veterinaria.obtenerClientes().find(c => c.nombre === nombre);
+            if (clienteAEliminar) {
+            veterinaria.bajaCliente(clienteAEliminar);
+            } else {
+            console.log("Cliente no encontrado.");
+            } 
+            break;
+        }
+        case "3": {
+            const nombre = readlineSync.question("Ingrese el nombre del cliente que quiere modificar: ");
+            const cliente = veterinaria.modificarCliente(nombre);
+
+            if(cliente) {
+                console.log(`
+                    ¿Que desea modificar?
+                    1. Nombre.
+                    2. Telefono.`);
+
+                    const opcionModificar = readlineSync.question("Seleccione una opción: ");
+
+                    switch(opcionModificar.trim()) {
+                        case "1": {
+                            const nuevoNombre = readlineSync.question("Ingrese el nuevo nombre: ");
+                            cliente.nombre = nuevoNombre;
+                            console.log("Nombre modificado con éxito.");
+                            break;
+                        }
+
+                        case "2": {
+                            const nuevoTelefono = readlineSync.question("Ingrese el nuevo telefono: ");
+                            cliente.telefono = nuevoTelefono;
+                            console.log("Telefono modificado con éxito.");
+                            break;
+                        }
+                        default: {
+                            console.log("Opcion no válida. Volviendo al menú principal.");
+                            
+                        }
+                    }
+                
+            }
+        }
+
+        case "4": {
+          // Imprimir Clientes
+            veterinaria.imprimirClientes();
+            break;
+        }
+        case "5": {
+          // Salir
+            continuar = false;
+            console.log("¡Gracias por usar el sistema de veterinaria!");
+            break;
+        }
+        default: {
+            console.log("Opción no válida. Intente nuevamente.");
+        }
+        }
+    }
+    }
+    
+    // Ejecutar la aplicación
+    main();
 
 /*
 const redVeterinarias = new RedVeterinarias("Riky");
