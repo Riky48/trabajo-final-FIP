@@ -2,9 +2,11 @@ import { Persona } from "./Persona";
 
 export class Proveedor extends Persona {
     private id: string;
+    public producto: string;
 
-    constructor(nombre: string, telefono: number) {
+    constructor(nombre: string, telefono: number, producto:string) {
         super(nombre, telefono)
+        this.producto = producto;
     }
 
 

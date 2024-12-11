@@ -3,13 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Mascota_1 = require("./Mascota");
 var Veterinaria_1 = require("./Veterinaria");
 var Cliente_1 = require("./Cliente");
+var Proveedor_1 = require("./Proveedor");
 var readlineSync = require("readline-sync");
 var veterinaria1 = new Veterinaria_1.Veterinaria("algo", "algo", 23);
 function main() {
     var veterinaria = new Veterinaria_1.Veterinaria("algo", "algo", 12);
     var continuar = true;
     var _loop_1 = function () {
-        console.log("\n    ===== Men\u00FA Veterinaria =====\n    1. Alta de Cliente.\n    2. Baja de Cliente.\n    3. Modificar cliente.\n    4. Imprimir Clientes.\n    5. Gestionar mascotas.\n    6. Salir.\n    ");
+        console.log("\n    ===== Men\u00FA Veterinaria =====\n    1. Alta de Cliente.\n    2. Baja de Cliente.\n    3. Modificar cliente.\n    4. Imprimir Clientes.\n    5. Gestionar mascotas.\n    6. Alta de proveedor.\n    7. Modificar proveedor.\n    8. Baja de proveedor.\n    9. Imprimir proveedor\n    10. Salir.\n    ");
         var opcion = readlineSync.question("Seleccione una opción: ");
         switch (opcion.trim()) {
             case "1": {
@@ -18,25 +19,27 @@ function main() {
                 var telefono = readlineSync.question("Ingrese el teléfono del cliente: ");
                 var nuevoCliente = new Cliente_1.Cliente(nombre, telefono);
                 veterinaria.altaCliente(nuevoCliente);
-                if (true) {
-                    var agregarmascota = readlineSync.keyInYNStrict("queres agregar una mascota?: ");
-                    if (agregarmascota) {
-                        var nombre_1 = readlineSync.question("nombre de tu mascota: ");
-                        var especie = readlineSync.question("especie de tu masctoa: ");
-                        var nuevaMascota = new Mascota_1.Mascota(nombre_1, especie);
+                var agregarOtraMascota = true;
+                while (agregarOtraMascota) {
+                    var deseaAgregarMascota = readlineSync.keyInYNStrict("Desea agregar una mascota?.");
+                    if (deseaAgregarMascota) {
+                        var nombreMascota = readlineSync.question("Nombre de la mascota: ");
+                        var especie = readlineSync.question("Especie de la mascota: ");
+                        var nuevaMascota = new Mascota_1.Mascota(nombreMascota, especie);
                         nuevoCliente.agregarMascota(nuevaMascota);
+                        console.log("Mascota ".concat(nombreMascota, " (").concat(especie, ") agregada con \u00E9xito!"));
                     }
                     else {
-                        console.log("volviendo al menu principal");
+                        agregarOtraMascota = false;
                     }
-                    break;
                 }
+                break;
             }
             case "2": {
                 // Baja de Cliente
                 veterinaria.imprimirClientes();
-                var nombre_2 = readlineSync.question("Ingrese el nombre del cliente a eliminar: ");
-                var clienteAEliminar = veterinaria.obtenerClientes().find(function (c) { return c.nombre === nombre_2; });
+                var nombre_1 = readlineSync.question("Ingrese el nombre del cliente a eliminar: ");
+                var clienteAEliminar = veterinaria.obtenerClientes().find(function (c) { return c.nombre === nombre_1; });
                 if (clienteAEliminar) {
                     veterinaria.bajaCliente(clienteAEliminar);
                 }
@@ -102,6 +105,34 @@ function main() {
                 break;
             }
             case "6": {
+                var nombre = readlineSync.question("Ingrese el nombre del proveedor: ");
+                var telefono = readlineSync.question("Ingrese el telefono del proveedor: ");
+                var producto = readlineSync.question("Ingrese el producto que provee: ");
+                var nuevoProveedor = new Proveedor_1.Proveedor(nombre, telefono, producto);
+                veterinaria.altaProveedor(nuevoProveedor);
+                break;
+            }
+            case "7": {
+                var nombre = readlineSync.question("Ingrese el nombre del proveedor que quieras modificar: ");
+                var proveedorExistente = veterinaria.modificarProveedor(nombre);
+                if (proveedorExistente) {
+                    var nuevoNombre = readlineSync.question("Ingrese el nuevo nombre: ");
+                    var nuevoTelefono = readlineSync.question("Ingrese el nuevo telefono: ");
+                    var nuevoProducto = readlineSync.question("Ingrese el nuevo producto: ");
+                    veterinaria.modificarProveedor(nombre, nuevoNombre, nuevoTelefono, nuevoProducto);
+                }
+                break;
+            }
+            case "8": {
+                var nombre = readlineSync.question("Ingrese el nombre del proveedor que quiere eliminar: ");
+                veterinaria.bajaProveedor(nombre);
+                break;
+            }
+            case "9": {
+                veterinaria.imprimirProveedores();
+                break;
+            }
+            case "10": {
                 // Salir
                 continuar = false;
                 console.log("¡Gracias por usar el sistema de veterinaria!");
@@ -118,82 +149,3 @@ function main() {
 }
 // Ejecutar la aplicación
 main();
-/*
-const redVeterinarias = new RedVeterinarias("Riky");
-
-const veterinaria1 = new Veterinaria("Alex", "Calle de la Veterinaria", 12345678);
-const veterinaria2 = new Veterinaria("richardinson", "piedras 555", 12345678666);
-
-
-redVeterinarias.altaVeterinaria(veterinaria1);
-redVeterinarias.altaVeterinaria(veterinaria2);
-
-redVeterinarias.imprimirVeterinarias();
-
-redVeterinarias.modificarVeterinaria("Alex", "Alexandria", "elvago 5656", 556678);
-redVeterinarias.imprimirVeterinarias();
-
-redVeterinarias.bajaVeterinaria(veterinaria1);
-redVeterinarias.bajaVeterinaria(veterinaria2);
-
-redVeterinarias.imprimirVeterinarias();
-
-/*
-let Proveedor1 = new Proveedor("Comidapaperro", 14554);
-let Proveedor2 = new Proveedor("Comidaspaexoticos", 1455554);
-
-
-
-let cliente1 = new Cliente("Juan", 12345678, 6);
-let cliente2 = new Cliente("Pedro", 98765432, 2);
-let cliente3 = new Cliente("Maria", 11111111, 0);
-
-veterinaria1.altaCliente(cliente1);
-veterinaria1.altaCliente(cliente2);
-veterinaria1.altaCliente(cliente3);
-
-veterinaria1.altaProveedor(Proveedor1);
-veterinaria1.altaProveedor(Proveedor2);
-
-veterinaria1.imprimirProveedores();
-
-veterinaria1.modificarProveedor("Comidapaperro", "Comidaspagato", 145343454);
-
-veterinaria1.imprimirProveedores();
-veterinaria1.bajaProveedor(Proveedor1);
-veterinaria1.bajaProveedor(Proveedor2);
-
-veterinaria1.imprimirProveedores();
-
-let mascota1 = new Mascota("Chiquito", "Cerdo", 1);
-let mascota2 = new Mascota("Odin", "Gato", 2);
-let mascota3 = new Mascota("Ocico", "Perro", 3);
-
-
-
-cliente1.agregarMascota(mascota1);
-cliente1.agregarMascota(mascota2);
-cliente2.agregarMascota(mascota2);
-cliente3.agregarMascota(mascota3);
-
-
-
-
-/*cliente1.incrementarVisitas();
-cliente1.incrementarVisitas();
-cliente1.esonoVip();
-cliente2.esonoVip();
-cliente3.esonoVip();
-
-console.log(cliente1);
-
-cliente1.modificarMascota("Chiquito", "Grandote", "Vaca");
-
-console.log(cliente1);
-console.log(cliente2)
-console.log(cliente3)
-
-veterinaria1.bajaCliente(cliente1);
-veterinaria1.bajaCliente(cliente2);
-veterinaria1.bajaCliente(cliente3);
-veterinaria1.imprimirClientes(); */ 

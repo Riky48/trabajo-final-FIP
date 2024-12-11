@@ -19,8 +19,10 @@ exports.Proveedor = void 0;
 var Persona_1 = require("./Persona");
 var Proveedor = /** @class */ (function (_super) {
     __extends(Proveedor, _super);
-    function Proveedor(nombre, telefono) {
-        return _super.call(this, nombre, telefono) || this;
+    function Proveedor(nombre, telefono, producto) {
+        var _this = _super.call(this, nombre, telefono) || this;
+        _this.producto = producto;
+        return _this;
     }
     Proveedor.prototype.getId = function () {
         return this.id;

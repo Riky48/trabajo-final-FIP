@@ -75,44 +75,45 @@ var Veterinaria = /** @class */ (function () {
         }
         return cliente;
     };
-    Veterinaria.prototype.altaProveedor = function (listaProveedores) {
-        listaProveedores.setId((0, uuid_1.v4)());
-        this.listaProveedores.push(listaProveedores);
+    Veterinaria.prototype.altaProveedor = function (proveedor) {
+        proveedor.setId((0, uuid_1.v4)());
+        this.listaProveedores.push(proveedor);
+        console.log("Proveedor ".concat(proveedor.nombre, " agregado con \u00E9xito"));
     };
-    Veterinaria.prototype.bajaProveedor = function (proveedor) {
-        var index = this.listaProveedores.indexOf(proveedor);
+    Veterinaria.prototype.bajaProveedor = function (nombre) {
+        var index = this.listaProveedores.findIndex(function (p) { return p.nombre === nombre; });
         if (index !== -1) {
             this.listaProveedores.splice(index, 1);
-            console.log("Se ha eliminado el proveedor: " + proveedor.getNombre());
+            console.log("Proveedor ".concat(nombre, " eliminado con \u00E9xito!"));
         }
         else {
-            console.log("No se ha encontrado el proveedor: " + proveedor.getNombre());
+            console.log("Proveedor ".concat(nombre, " no encontrado."));
         }
     };
     Veterinaria.prototype.obtenerProveedores = function () {
         return this.listaProveedores;
     };
     Veterinaria.prototype.imprimirProveedores = function () {
-        var clientes = this.obtenerProveedores();
-        if (clientes.length === 0) {
-            console.log("No hay proveedores en la lista.");
+        if (this.listaProveedores.length === 0) {
+            console.log("No hay proveedores registrados.");
         }
         else {
-            // Imprime cada proveedor usando el método mostrarProveedor()
-            clientes.forEach(function (cliente) {
-                console.log(cliente.mostrarProveedor());
-            });
+            console.log("Lista de proveedores: ");
+            this.listaProveedores.forEach(function (p) { return console.log("".concat(p.nombre, " | Telefono: ").concat(p.telefono, " | Producto: ").concat(p.producto)); });
         }
     };
-    Veterinaria.prototype.modificarProveedor = function (nombre, nuevonombre, nuevotelefono) {
-        var provEncontrado = this.listaProveedores.findIndex(function (proveedor) { return proveedor.getNombre() === nombre; });
-        if (provEncontrado !== -1) {
-            this.listaProveedores[provEncontrado].setNombre(nuevonombre);
-            this.listaProveedores[provEncontrado].setTelefono(nuevotelefono);
-            console.log("Se ha modificado el proveedor: " + nombre);
+    Veterinaria.prototype.modificarProveedor = function (nombre, nuevoNombre, nuevoTelefono, nuevoProducto) {
+        var proveedor = this.listaProveedores.find(function (p) { return p.nombre === nombre; });
+        if (proveedor) {
+            proveedor.nombre = nuevoNombre || proveedor.nombre;
+            proveedor.telefono = nuevoTelefono || proveedor.telefono;
+            proveedor.producto = nuevoProducto || proveedor.producto;
+            console.log("Proveedor ".concat(nombre, " modificado con \u00E9xito!"));
+            return true;
         }
         else {
-            console.log("No se ha encontrado el proveedor: " + nombre);
+            console.log("Proveedor ".concat(nombre, " no encontrado."));
+            return false;
         }
     };
     return Veterinaria;

@@ -107,19 +107,20 @@ export class Veterinaria  implements IdUnico {
 
 
 
-    public altaProveedor(listaProveedores: Proveedor): void {
-        listaProveedores.setId(uuidv4());
-        this.listaProveedores.push(listaProveedores);
+    public altaProveedor(proveedor: Proveedor): void {
+        proveedor.setId(uuidv4());
+        this.listaProveedores.push(proveedor);
+        console.log(`Proveedor ${proveedor.nombre} agregado con éxito`);
         
     }
     
-    public bajaProveedor(proveedor: Proveedor): void {
-        const index = this.listaProveedores.indexOf(proveedor);
+    public bajaProveedor(nombre: string): void {
+        const index = this.listaProveedores.findIndex((p) => p.nombre === nombre);
         if (index !== -1) {
             this.listaProveedores.splice(index, 1);
-            console.log("Se ha eliminado el proveedor: " + proveedor.getNombre());
+            console.log(`Proveedor ${nombre} eliminado con éxito!`);
         } else {
-            console.log("No se ha encontrado el proveedor: " + proveedor.getNombre());
+            console.log(`Proveedor ${nombre} no encontrado.`);
         }
         
     }
@@ -128,28 +129,31 @@ export class Veterinaria  implements IdUnico {
         return this.listaProveedores;
     }
 
+
     public imprimirProveedores(): void {
-        const clientes = this.obtenerProveedores();
-        if (clientes.length === 0) {
-            console.log("No hay proveedores en la lista.");
-        } else {
-            // Imprime cada proveedor usando el método mostrarProveedor()
-            clientes.forEach(cliente => {
-                console.log(cliente.mostrarProveedor());
-            });
+        if(this.listaProveedores.length === 0) {
+            console.log("No hay proveedores registrados.");
+        }else {
+            console.log("Lista de proveedores: ");
+            this.listaProveedores.forEach((p) => console.log(`${p.nombre} | Telefono: ${p.telefono} | Producto: ${p.producto}`)
+            );
         }
     }
 
-    public modificarProveedor(nombre : string, nuevonombre: string, nuevotelefono: number): void {
-        const provEncontrado = this.listaProveedores.findIndex(proveedor => proveedor.getNombre() === nombre);
-        if (provEncontrado !== -1) {
-            this.listaProveedores[provEncontrado].setNombre(nuevonombre);
-            this.listaProveedores[provEncontrado].setTelefono(nuevotelefono);
-            console.log("Se ha modificado el proveedor: " + nombre);
-        } else {
-            console.log("No se ha encontrado el proveedor: " + nombre);
+    public modificarProveedor(nombre : string, nuevoNombre?: string, nuevoTelefono?: number, nuevoProducto?:string): boolean {
+        const proveedor = this.listaProveedores.find((p) => p.nombre === nombre);
+        if(proveedor) {
+            proveedor.nombre = nuevoNombre || proveedor.nombre;
+            proveedor.telefono = nuevoTelefono || proveedor.telefono;
+            proveedor.producto = nuevoProducto || proveedor.producto;
+
+            console.log(`Proveedor ${nombre} modificado con éxito!`);
+            return true;
+        }else {
+            console.log(`Proveedor ${nombre} no encontrado.`);
+            return false;
         }
-    
+
     }
 
     
