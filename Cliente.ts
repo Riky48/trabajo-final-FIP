@@ -3,18 +3,18 @@ import { Mascota } from "./Mascota";
 
 export class Cliente extends Persona {
 
-    id: string;
+    public id: string;
     public mascotas: Mascota[] = [];
-    visitas: number;
-    esVip: boolean;
+    public visitas: number;
+    public esVip: boolean;
 
 
     constructor(nombre:string, telefono:number, Mascota?: Mascota, id?:string, esVip?:boolean,  visitas?:number) {
         super(nombre, telefono);
 
         this.mascotas = this.mascotas;
-        this.visitas = this.visitas;
-        this.esVip = this.esVip;
+        this.visitas = 0;
+        this.esVip = false;
     }
 
 
@@ -47,22 +47,16 @@ export class Cliente extends Persona {
         return `ID: ${this.id}, Nombre: ${this.nombre}, Teléfono: ${this.telefono}`;
     }
 
-    incrementarVisitas():void {
+
+    public incrementarVisitas():void {
         this.visitas ++;
+        this.verificarVIP();
     }
 
-    setVip(esVip:boolean): void {
-        this.esVip = esVip;
-    }
-    
-    public esONoVip():void {
-        if(this.visitas >= 5) {
-            this.esVip = true;
-            console.log(`${this.nombre} es VIP`);
-        } else {
-            console.log(`${this.nombre} no es VIP`);
+    public verificarVIP(): void {
+        if(this.visitas > 5) {
+            this.esVip= true;
         }
-        
     }
 
     public agregarMascota(mascota : Mascota):void {

@@ -35,26 +35,17 @@ var Veterinaria = /** @class */ (function () {
     Veterinaria.prototype.setId = function (id) {
         this.id = id;
     };
-    Veterinaria.prototype.mostrarVeterinaria = function () {
-        return "ID: ".concat(this.id, ", Nombre: ").concat(this.nombre, ", Tel\u00E9fono: ").concat(this.telefono);
-    };
     Veterinaria.prototype.altaCliente = function (cliente) {
         cliente.setId((0, uuid_1.v4)()); // Asigna un ID único al cliente
-        // Verificar si el cliente ya existe por nombre en la lista
-        var clienteExistente = this.listaClientes.find(function (c) { return c.nombre === cliente.nombre; });
+        var clienteExistente = this.listaClientes.find(function (c) { return c.nombre === cliente.nombre && c.telefono === cliente.telefono; });
         if (clienteExistente) {
-            // Si el cliente ya existe, incrementamos las visitas
-            console.log("El cliente ".concat(cliente.nombre, " ya existe en la lista."));
-            clienteExistente.incrementarVisitas(); // Incrementar visitas del cliente existente
-            // Si las visitas llegan a 5, marcar al cliente como VIP
-            if (clienteExistente.getVisitas() >= 5) {
-                clienteExistente.setVip(true); // Se marca como VIP
-                console.log("El cliente ".concat(clienteExistente.nombre, " ha alcanzado las 5 visitas y ahora es VIP."));
-            }
+            clienteExistente.incrementarVisitas();
+            console.log("Bienvenido nuevamente, ".concat(cliente.nombre, "! Tus visitas ahora son: ").concat(clienteExistente.visitas));
         }
         else {
-            // Si el cliente no existe, lo agregamos a la lista
+            cliente.incrementarVisitas();
             this.listaClientes.push(cliente);
+            console.log("Bienvenido, ".concat(cliente.nombre, "! Te registramos como nuevo cliente."));
         }
     };
     Veterinaria.prototype.bajaCliente = function (cliente) {
@@ -79,8 +70,8 @@ var Veterinaria = /** @class */ (function () {
         }
         else {
             // Imprime cada cliente usando el método mostrarCliente()
-            clientes.forEach(function (cliente) {
-                console.log(cliente.mostrarCliente());
+            clientes.forEach(function (cliente, index) {
+                console.log("".concat(index + 1, ". \n                    Nombre: ").concat(cliente.nombre, ",\n                    Telefono: ").concat(cliente.telefono, ",\n                    Visitas: ").concat(cliente.visitas, ",\n                    VIP: ").concat(cliente.esVip ? "Si" : "No"));
                 cliente.imprimirMascota();
             });
         }

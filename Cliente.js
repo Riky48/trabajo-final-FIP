@@ -23,8 +23,8 @@ var Cliente = /** @class */ (function (_super) {
         var _this = _super.call(this, nombre, telefono) || this;
         _this.mascotas = [];
         _this.mascotas = _this.mascotas;
-        _this.visitas = _this.visitas;
-        _this.esVip = _this.esVip;
+        _this.visitas = 0;
+        _this.esVip = false;
         return _this;
     }
     Cliente.prototype.getId = function () {
@@ -50,17 +50,11 @@ var Cliente = /** @class */ (function (_super) {
     };
     Cliente.prototype.incrementarVisitas = function () {
         this.visitas++;
+        this.verificarVIP();
     };
-    Cliente.prototype.setVip = function (esVip) {
-        this.esVip = esVip;
-    };
-    Cliente.prototype.esONoVip = function () {
-        if (this.visitas >= 5) {
+    Cliente.prototype.verificarVIP = function () {
+        if (this.visitas > 5) {
             this.esVip = true;
-            console.log("".concat(this.nombre, " es VIP"));
-        }
-        else {
-            console.log("".concat(this.nombre, " no es VIP"));
         }
     };
     Cliente.prototype.agregarMascota = function (mascota) {

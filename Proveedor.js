@@ -30,9 +30,6 @@ var Proveedor = /** @class */ (function (_super) {
     Proveedor.prototype.setId = function (id) {
         this.id = id;
     };
-    Proveedor.prototype.mostrarProveedor = function () {
-        return "ID: ".concat(this.id, ", Nombre: ").concat(this.nombre, ", Tel\u00E9fono: ").concat(this.telefono);
-    };
     return Proveedor;
 }(Persona_1.Persona));
 exports.Proveedor = Proveedor;

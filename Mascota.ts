@@ -1,7 +1,7 @@
 export class Mascota {
-    nombre: string;
-    especie: string;
-    id: number;
+    public nombre: string;
+    public especie: string;
+    public id: string;
 
     constructor(nombre:string, especie:string, id?:number) {
         this.nombre = nombre;
@@ -33,7 +33,7 @@ export class Mascota {
         return this.id;
     }
 
-    setId(id:number): void {
+    setId(id:string): void {
         this.id = id;
     }
 }
