@@ -5,7 +5,6 @@ import { Cliente } from "./Cliente";
 import { Proveedor } from "./Proveedor";
 import * as readlineSync from "readline-sync";
 
-const veterinaria1 = new Veterinaria("algo", "algo", 23)
 
 
 

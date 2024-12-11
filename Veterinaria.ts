@@ -2,6 +2,8 @@ import { IdUnico } from "./IdUnico";
 import { Cliente } from './Cliente';
 import { v4 as uuidv4 } from 'uuid';
 import { Proveedor } from "./Proveedor";
+import chalk from "chalk";
+import table from "cli-table3";
 
 
 export class Veterinaria  implements IdUnico {
@@ -85,7 +87,7 @@ export class Veterinaria  implements IdUnico {
     public imprimirClientes(): void {
         const clientes = this.obtenerClientes();
         if (clientes.length === 0) {
-            console.log("No hay clientes en la lista.");
+            console.log(chalk.yellow("No hay clientes en la lista."));
         } else {
             // Imprime cada cliente usando el método mostrarCliente()
             clientes.forEach(cliente => {
