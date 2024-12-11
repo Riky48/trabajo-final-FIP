@@ -9,6 +9,7 @@ var Veterinaria = /** @class */ (function () {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.listaClientes = [];
     }
     Veterinaria.prototype.getNombre = function () {
         return this.nombre;
@@ -38,8 +39,23 @@ var Veterinaria = /** @class */ (function () {
         return "ID: ".concat(this.id, ", Nombre: ").concat(this.nombre, ", Tel\u00E9fono: ").concat(this.telefono);
     };
     Veterinaria.prototype.altaCliente = function (cliente) {
-        cliente.setId((0, uuid_1.v4)());
-        this.listaClientes.push(cliente);
+        cliente.setId((0, uuid_1.v4)()); // Asigna un ID único al cliente
+        // Verificar si el cliente ya existe por nombre en la lista
+        var clienteExistente = this.listaClientes.find(function (c) { return c.nombre === cliente.nombre; });
+        if (clienteExistente) {
+            // Si el cliente ya existe, incrementamos las visitas
+            console.log("El cliente ".concat(cliente.nombre, " ya existe en la lista."));
+            clienteExistente.incrementarVisitas(); // Incrementar visitas del cliente existente
+            // Si las visitas llegan a 5, marcar al cliente como VIP
+            if (clienteExistente.getVisitas() >= 5) {
+                clienteExistente.setVip(true); // Se marca como VIP
+                console.log("El cliente ".concat(clienteExistente.nombre, " ha alcanzado las 5 visitas y ahora es VIP."));
+            }
+        }
+        else {
+            // Si el cliente no existe, lo agregamos a la lista
+            this.listaClientes.push(cliente);
+        }
     };
     Veterinaria.prototype.bajaCliente = function (cliente) {
         var index = this.listaClientes.indexOf(cliente);
@@ -51,8 +67,10 @@ var Veterinaria = /** @class */ (function () {
             console.log("No se ha encontrado el cliente: " + cliente.getNombre());
         }
     };
-    Veterinaria.prototype.obtenerClientes = function () {
-        return this.listaClientes;
+    Veterinaria.prototype.obtenerClientes = function (nombre) {
+        return this.listaClientes.filter(function (cliente) {
+            return nombre ? cliente.nombre === nombre : true;
+        });
     };
     Veterinaria.prototype.imprimirClientes = function () {
         var clientes = this.obtenerClientes();

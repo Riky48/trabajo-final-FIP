@@ -2,7 +2,7 @@ import { IdUnico } from "./IdUnico";
 import { Cliente } from './Cliente';
 import { v4 as uuidv4 } from 'uuid';
 import { Proveedor } from "./Proveedor";
-
+import chalk from "chalk";
 
 export class Veterinaria  implements IdUnico {
     private id: string;
@@ -18,7 +18,7 @@ export class Veterinaria  implements IdUnico {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
-        
+        this.listaClientes = [];
     }
     
 
@@ -58,10 +58,28 @@ export class Veterinaria  implements IdUnico {
         return `ID: ${this.id}, Nombre: ${this.nombre}, Teléfono: ${this.telefono}`;
     }
 
+
+
     public altaCliente(cliente: Cliente): void {
-        cliente.setId(uuidv4());
-        this.listaClientes.push(cliente);
-        
+        cliente.setId(uuidv4()); // Asigna un ID único al cliente
+
+        // Verificar si el cliente ya existe por nombre en la lista
+        const clienteExistente = this.listaClientes.find((c) => c.nombre === cliente.nombre);
+
+        if (clienteExistente) {
+            // Si el cliente ya existe, incrementamos las visitas
+            console.log(`El cliente ${cliente.nombre} ya existe en la lista.`);
+            clienteExistente.incrementarVisitas(); // Incrementar visitas del cliente existente
+
+            // Si las visitas llegan a 5, marcar al cliente como VIP
+            if (clienteExistente.getVisitas() >= 5) {
+                clienteExistente.setVip(true); // Se marca como VIP
+                console.log(`El cliente ${clienteExistente.nombre} ha alcanzado las 5 visitas y ahora es VIP.`);
+            }
+        } else {
+            // Si el cliente no existe, lo agregamos a la lista
+            this.listaClientes.push(cliente);
+        }
     }
 
 
@@ -77,8 +95,10 @@ export class Veterinaria  implements IdUnico {
         
     }
 
-    public obtenerClientes(): Cliente[] {
-        return this.listaClientes;
+    public obtenerClientes(nombre?:string): Cliente[] {
+        return this.listaClientes.filter(cliente => {
+            return nombre ? cliente.nombre === nombre: true;
+        });
     }
 
     

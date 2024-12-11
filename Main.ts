@@ -1,19 +1,20 @@
-import { RedVeterinarias } from "./RedVeterinarias";
 import { Mascota } from "./Mascota";
 import { Veterinaria } from "./Veterinaria";
 import { Cliente } from "./Cliente";
 import { Proveedor } from "./Proveedor";
 import * as readlineSync from "readline-sync";
+import { RedVeterinarias} from "./RedVeterinarias";
 
 
 function main() {
-    const veterinaria = new Veterinaria("algo", "algo", 12);
+    const veterinaria = new Veterinaria("Huellas", "calle 293", 228457181);
 
 
     let continuar = true;
 
     while (continuar) {
     console.log(`
+        Bienvenido a Veterinaria: "${veterinaria.nombre}" Dirección: "${veterinaria.getDireccion()}" Telefono: "${veterinaria.getTelefono()}"
     ===== Menú Veterinaria =====
     1. Alta de Cliente.
     2. Baja de Cliente.
@@ -34,6 +35,7 @@ function main() {
           // Alta de Cliente
             const nombre = readlineSync.question("Ingrese el nombre del cliente: ");
             const telefono = readlineSync.question("Ingrese el teléfono del cliente: ");
+            const esVip = Math.random()
             const nuevoCliente = new Cliente(nombre, telefono,);
             veterinaria.altaCliente(nuevoCliente);
 

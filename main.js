@@ -6,16 +6,17 @@ var Cliente_1 = require("./Cliente");
 var Proveedor_1 = require("./Proveedor");
 var readlineSync = require("readline-sync");
 function main() {
-    var veterinaria = new Veterinaria_1.Veterinaria("algo", "algo", 12);
+    var veterinaria = new Veterinaria_1.Veterinaria("Huellas", "calle 293", 228457181);
     var continuar = true;
     var _loop_1 = function () {
-        console.log("\n    ===== Men\u00FA Veterinaria =====\n    1. Alta de Cliente.\n    2. Baja de Cliente.\n    3. Modificar cliente.\n    4. Imprimir Clientes.\n    5. Gestionar mascotas.\n    6. Alta de proveedor.\n    7. Modificar proveedor.\n    8. Baja de proveedor.\n    9. Imprimir proveedor\n    10. Salir.\n    ");
+        console.log("\n        Bienvenido a Veterinaria: \"".concat(veterinaria.nombre, "\" Direcci\u00F3n: \"").concat(veterinaria.getDireccion(), "\" Telefono: \"").concat(veterinaria.getTelefono(), "\"\n    ===== Men\u00FA Veterinaria =====\n    1. Alta de Cliente.\n    2. Baja de Cliente.\n    3. Modificar cliente.\n    4. Imprimir Clientes.\n    5. Gestionar mascotas.\n    6. Alta de proveedor.\n    7. Modificar proveedor.\n    8. Baja de proveedor.\n    9. Imprimir proveedor\n    10. Salir.\n    "));
         var opcion = readlineSync.question("Seleccione una opción: ");
         switch (opcion.trim()) {
             case "1": {
                 // Alta de Cliente
                 var nombre = readlineSync.question("Ingrese el nombre del cliente: ");
                 var telefono = readlineSync.question("Ingrese el teléfono del cliente: ");
+                var esVip = Math.random();
                 var nuevoCliente = new Cliente_1.Cliente(nombre, telefono);
                 veterinaria.altaCliente(nuevoCliente);
                 var agregarOtraMascota = true;

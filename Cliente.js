@@ -24,7 +24,7 @@ var Cliente = /** @class */ (function (_super) {
         _this.mascotas = [];
         _this.mascotas = _this.mascotas;
         _this.visitas = _this.visitas;
-        _this.esVip = false;
+        _this.esVip = _this.esVip;
         return _this;
     }
     Cliente.prototype.getId = function () {
@@ -50,6 +50,9 @@ var Cliente = /** @class */ (function (_super) {
     };
     Cliente.prototype.incrementarVisitas = function () {
         this.visitas++;
+    };
+    Cliente.prototype.setVip = function (esVip) {
+        this.esVip = esVip;
     };
     Cliente.prototype.esONoVip = function () {
         if (this.visitas >= 5) {

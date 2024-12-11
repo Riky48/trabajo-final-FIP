@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RedVeterinarias = void 0;
 var uuid_1 = require("uuid");
 var RedVeterinarias = /** @class */ (function () {
-    function RedVeterinarias(nombre) {
+    function RedVeterinarias() {
         this.id = Math.floor(Math.random() * 1000000000);
-        this.Veterinarias = [];
-        this.nombre = nombre;
+        this.veterinarias = [];
+        this.veterinarias = [];
     }
     RedVeterinarias.prototype.getNombre = function () {
         return this.nombre;
@@ -16,12 +16,12 @@ var RedVeterinarias = /** @class */ (function () {
     };
     RedVeterinarias.prototype.altaVeterinaria = function (veterinaria) {
         veterinaria.setId((0, uuid_1.v4)());
-        this.Veterinarias.push(veterinaria);
+        this.veterinarias.push(veterinaria);
     };
     RedVeterinarias.prototype.bajaVeterinaria = function (veterinaria) {
-        var index = this.Veterinarias.indexOf(veterinaria);
+        var index = this.veterinarias.indexOf(veterinaria);
         if (index !== -1) {
-            this.Veterinarias.splice(index, 1);
+            this.veterinarias.splice(index, 1);
             console.log("Se ha eliminado la veterinaria: " + veterinaria.getNombre());
         }
         else {
@@ -29,14 +29,14 @@ var RedVeterinarias = /** @class */ (function () {
         }
     };
     RedVeterinarias.prototype.obtenerVeterinarias = function () {
-        return this.Veterinarias;
+        return this.veterinarias;
     };
     RedVeterinarias.prototype.modificarVeterinaria = function (nombre, nuevonombre, nuevadireccion, nuevotelefono) {
-        var veteEncontrada = this.Veterinarias.findIndex(function (veterinaria) { return veterinaria.getNombre() === nombre; });
+        var veteEncontrada = this.veterinarias.findIndex(function (veterinaria) { return veterinaria.getNombre() === nombre; });
         if (veteEncontrada !== -1) {
-            this.Veterinarias[veteEncontrada].setNombre(nuevonombre);
-            this.Veterinarias[veteEncontrada].setDireccion(nuevadireccion);
-            this.Veterinarias[veteEncontrada].setTelefono(nuevotelefono);
+            this.veterinarias[veteEncontrada].setNombre(nuevonombre);
+            this.veterinarias[veteEncontrada].setDireccion(nuevadireccion);
+            this.veterinarias[veteEncontrada].setTelefono(nuevotelefono);
             console.log("Se ha modificado la veterinaria: " + nombre);
         }
         else {
@@ -44,14 +44,13 @@ var RedVeterinarias = /** @class */ (function () {
         }
     };
     RedVeterinarias.prototype.imprimirVeterinarias = function () {
-        var veterinarias = this.obtenerVeterinarias();
-        if (veterinarias.length === 0) {
-            console.log("No hay veterinarias en la lista.");
+        if (this.veterinarias.length === 0) {
+            console.log("No hay sucursales regsitradas.");
         }
         else {
-            // Imprime cada veterinaria usando el método mostrarVeterinaria()
-            veterinarias.forEach(function (veterinarias) {
-                console.log(veterinarias.mostrarVeterinaria());
+            console.log("Sucursales: ");
+            this.veterinarias.forEach(function (sucursal, index) {
+                console.log("".concat(index + 1, ". ").concat(sucursal.nombre));
             });
         }
     };

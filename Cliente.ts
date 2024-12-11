@@ -14,7 +14,7 @@ export class Cliente extends Persona {
 
         this.mascotas = this.mascotas;
         this.visitas = this.visitas;
-        this.esVip = false;
+        this.esVip = this.esVip;
     }
 
 
@@ -51,6 +51,10 @@ export class Cliente extends Persona {
         this.visitas ++;
     }
 
+    setVip(esVip:boolean): void {
+        this.esVip = esVip;
+    }
+    
     public esONoVip():void {
         if(this.visitas >= 5) {
             this.esVip = true;
