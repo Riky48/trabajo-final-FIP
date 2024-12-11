@@ -49,9 +49,9 @@ var RedVeterinarias = /** @class */ (function () {
             console.log("No hay veterinarias en la lista.");
         }
         else {
-            // Imprime cada cliente usando el método mostrarCliente()
-            veterinarias.forEach(function (cliente) {
-                console.log(cliente.mostrarVeterinaria());
+            // Imprime cada veterinaria usando el método mostrarVeterinaria()
+            veterinarias.forEach(function (veterinarias) {
+                console.log(veterinarias.mostrarVeterinaria());
             });
         }
     };

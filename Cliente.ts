@@ -51,7 +51,7 @@ export class Cliente extends Persona {
         this.visitas ++;
     }
 
-    public esonoVip():void {
+    public esONoVip():void {
         if(this.visitas >= 5) {
             this.esVip = true;
             console.log(`${this.nombre} es VIP`);
@@ -104,7 +104,8 @@ export class Cliente extends Persona {
         }else {
             console.log(`Mascota ${nombre} no encontrada.`);
             return false;
-        }
+        
     }
 
+    }
 }

@@ -51,7 +51,7 @@ var Cliente = /** @class */ (function (_super) {
     Cliente.prototype.incrementarVisitas = function () {
         this.visitas++;
     };
-    Cliente.prototype.esonoVip = function () {
+    Cliente.prototype.esONoVip = function () {
         if (this.visitas >= 5) {
             this.esVip = true;
             console.log("".concat(this.nombre, " es VIP"));
